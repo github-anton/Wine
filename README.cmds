@@ -1,0 +1,16 @@
+CC="ccache gcc -m32" ./configure --verbose --disable-tests 
+
+mkdir $HOME/wine64
+cd $HOME/wine64
+../wine-git/configure --enable-win64
+make -j5
+
+mkdir $HOME/wine32
+cd $HOME/wine32
+~/wine-git/configure --with-wine64=$HOME/wine64 --with-wine-tools=$HOME/wine32-tools
+make -j5
+
+cd $HOME/wine32
+sudo make install
+cd $HOME/wine64
+sudo make install

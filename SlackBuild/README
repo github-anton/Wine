@@ -1,0 +1,25 @@
+Wine is an Open Source implementation of the Windows API on top of X and Unix.
+
+If your video card does not support hardware-accelerated OpenGL, then run the
+script like this:  OPENGL=NO ./wine.SlackBuild
+
+You can compile Wine in a few ways:
+
+Wine32+Wine64 -> multilib   x86_64
+Wine64                      x86_64
+Wine32                      x86
+
+Wine32+Wine64+staging       staging x86_64
+Wine64+staging              staging x86_64
+Wine32+staging              staging x86
+
+BUILD_W64="yes" - compile Wine64
+BUILD_W64="no"  - do not compile Wine64
+
+BUILD_W32="yes" - compile Wine32
+BUILD_W32="no"  - do not compile Wine32
+
+BUILD_STAGING="yes" - compile with staging
+BUILD_STAGING="no"  - compile without staging
+
+To compile with staging download respective wine-staging.zip form the GitHub, then rename it as wine-staging-<wine ver>.zip.
