@@ -89,11 +89,22 @@ else
 fi
 
 
+#
+# Download sources if not yet downloaded.
+#
+wget -nc https://dl.winehq.org/wine/source/11.x/wine-$VERSION.tar.xz
+if [ ! -e wine-staging-$VERSION.zip ]; then
+  wget -nc https://github.com/wine-staging/wine-staging/archive/refs/tags/v$VERSION.zip
+  mv v$VERSION.zip wine-staging-$VERSION.zip
+fi
+
+# Remove build files
 rm -rf $PKG $TMP/build-wine64 $TMP/build-wine32
-# remove sources
+# Remove old sources from build directory
 rm -rf $TMP/$PRGNAM-$VERSION
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
+# Extract sources
 tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
 cd $PRGNAM-$VERSION
 
@@ -110,6 +121,7 @@ if [ "$APPLY_PATCHES" = "yes" ]; then
 fi
 
 
+# Change permissions.
 chown -R root:root .
 find . \
  \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
